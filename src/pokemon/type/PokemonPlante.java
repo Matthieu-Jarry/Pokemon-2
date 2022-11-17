@@ -1,7 +1,6 @@
 package pokemon.type;
 
 import pokemon.Pokemon;
-import pokemon.Pokemon0;
 
 public class PokemonPlante extends Pokemon{
 
@@ -10,17 +9,19 @@ public class PokemonPlante extends Pokemon{
 	}
 
 	@Override
-	public void attaquer(Pokemon0 p) {
-		// TODO Auto-generated method stub
-		
+	public void attaquer(Pokemon p) {
+		log("J'attaque " +p.getNom());
+		p.subir(this);	
 	}
 
 	@Override
 	public void subir(Pokemon p) {
-		// TODO Auto-generated method stub
-		
+		switch (p.getType()) {
+		case FEU -> this.hp -= p.getAtk()*2;
+		case EAU, PLANTE -> this.hp -= p.getAtk()/2;
+		default ->
+		throw new IllegalArgumentException("Unexpected value: " + p.getType());
+		}	
 	}
-	
-	
 
 }

@@ -10,12 +10,20 @@ public abstract class Pokemon {
 	protected int hp;
 	private int atk;
 	private int niveau;
-	private static int niveauMax;
+	private static int niveauMax = 10;
 	private TypePokemon type;
 	private static Random random = new Random();
 	
-	public Pokemon(String nom, TypePokemon type) {
+	protected Pokemon(String nom, TypePokemon type) {
 		this.nom = nom;
+		this.type = type;
+		this.niveau = random.nextInt(1, niveauMax + 1);
+		this.hp = this.niveau*2;
+		this.atk = (this.niveau/2) +1;
+	}
+	
+	public String getNom() {
+		return nom;
 	}
 
 	public int getHp() {
@@ -38,24 +46,24 @@ public abstract class Pokemon {
 		return hp == 0;
 	}
 	
-	public abstract void attaquer(Pokemon0 p);
+	public abstract void attaquer(Pokemon p);
 	
 	public abstract void subir(Pokemon p);
 	
 	public void soigner() {
-		
+		this.hp = this.niveau*2;
 	}
 	
 	public String toString() {
-		return "";
+		return "Je m'appelle " + getNom() + " !\nje suis de type " +getType()+ "\nje suis niveau " +getNiveau()+ "\nj'ai " +getHp()+ " points de vie\nmon attaque de base est de " +getAtk();
 	}
 	
 	private String prefixe() {
-		return "";
+		return "[Pokemon " + getNom() + "] : ";
 	}
 	
 	public void log(String msg) {
-		
+		System.out.println(prefixe()+msg);
 	}
 
 }
